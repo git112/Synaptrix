@@ -1,26 +1,69 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-space-grotesk: 'Space Grotesk', sans-serif;
+  --font-inter: 'Inter', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    @apply antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Light theme variables */
+    --bg-primary: 250 250 250; /* #fafafa */
+    --bg-surface: 255 255 255; /* #ffffff */
+    --bg-card: 248 249 255; /* #f8f9ff */
+    --text-primary: 31 41 55; /* #1f2937 */
+    --text-secondary: 107 114 128; /* #6b7280 */
+    --border-color: 229 231 235; /* #e5e7eb */
+    --primary-color: 30 58 138; /* #1e3a8a */
+  }
+
+  .dark {
+    /* Dark theme variables */
+    --bg-primary: 10 10 15; /* #0a0a0f */
+    --bg-surface: 26 26 37; /* #1a1a25 */
+    --bg-card: 42 42 53; /* #2a2a35 */
+    --text-primary: 255 255 255; /* #ffffff */
+    --text-secondary: 160 160 160; /* #a0a0a0 */
+    --border-color: 51 51 74; /* #33334a */
+    --primary-color: 0 212 255; /* #00d4ff */
+  }
+
+  body {
+    background: rgb(var(--bg-primary));
+    color: rgb(var(--text-primary));
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Neural network background animation */
+@layer components {
+  .neural-bg {
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(179, 71, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(0, 255, 255, 0.05) 0%, transparent 50%);
+  }
+
+  .glass-card {
+    background: rgba(var(--bg-surface), 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(var(--border-color), 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(var(--primary-color), 0.3);
+  }
+}
+
+@layer utilities {
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary-gradient-start to-primary-gradient-end;
+  }
 }
